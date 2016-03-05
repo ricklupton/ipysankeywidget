@@ -1,0 +1,57 @@
+/* namespaced CSS directives */
+.ipysankeywidget.SankeyWidgetView {
+
+  svg {
+    
+    .node.selected {
+      filter: drop-shadow( 0px 0px 10px deeppink );
+    }
+
+    .link {
+      opacity: 0.8;
+      fill: steelblue;
+    }
+
+    g.sankey {
+      font-size: 10pt;
+    }
+
+    .node {
+      cursor: pointer;
+
+      line {
+        stroke-width: 1px;
+        stroke: #000;
+      }
+    }
+
+    .node-type-process {
+      line {
+        stroke-width: 4px;
+        stroke: #888;
+      }
+    }
+
+    .node-type-material {
+      line {
+        opacity: 0.5;
+      }
+
+      text {
+        fill: black;
+        // stroke: white;
+        // stroke-width: 0.5px;  /* not sure why but this helps with shadow on thin letters */
+        text-shadow: white 0px 0px 2px;
+        filter: url(#solid);
+      }
+    }
+
+    .node.offstage text {
+      display: none;
+    }
+
+    .node.offstage:hover text {
+      display: block;
+    }
+  }
+}

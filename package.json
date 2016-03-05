@@ -1,0 +1,25 @@
+{
+  "name": "ipysankeywidget",
+  "repository": "https://github.com/ricklupton/ipysankeywidget",
+  "version": "0.1.0",
+  "description": "IPython Sankey diagram widget",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "jshint": "jshint ipysankeywidget/static/ipysankeywidget/js/*.js",
+    "build": "browserify -d -s ipysankeywidget_view -x jquery ipysankeywidget/static/src/*.js > ipysankeywidget/static/ipysankeywidget/js/view.js",
+    "less": "lessc ipysankeywidget/static/less/widget_nbsankey.less ipysankeywidget/static/ipysankeywidget/css/widget_nbsankey.css"
+  },
+  "author": "Rick Lupton",
+  "license": "BSD",
+  "devDependencies": {
+    "casperjs": "*",
+    "less": "*",
+    "jshint": "*",
+    "browserify": "~13.0.0"
+  },
+  "dependencies": {
+    "d3": "~3.5.16",
+    "d3-sankey-diagram": "~0.1.0"
+  }
+}

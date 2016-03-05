@@ -1,0 +1,4 @@
+
+IPython Sankey diagram widget
+=============================
+

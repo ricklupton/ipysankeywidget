@@ -1,0 +1,36 @@
+/* namespaced CSS directives */
+.ipysankeywidget.SankeyWidgetView svg .node.selected {
+  filter: drop-shadow(0px 0px 10px deeppink);
+}
+.ipysankeywidget.SankeyWidgetView svg .link {
+  opacity: 0.8;
+  fill: steelblue;
+}
+.ipysankeywidget.SankeyWidgetView svg g.sankey {
+  font-size: 10pt;
+}
+.ipysankeywidget.SankeyWidgetView svg .node {
+  cursor: pointer;
+}
+.ipysankeywidget.SankeyWidgetView svg .node line {
+  stroke-width: 1px;
+  stroke: #000;
+}
+.ipysankeywidget.SankeyWidgetView svg .node-type-process line {
+  stroke-width: 4px;
+  stroke: #888;
+}
+.ipysankeywidget.SankeyWidgetView svg .node-type-material line {
+  opacity: 0.5;
+}
+.ipysankeywidget.SankeyWidgetView svg .node-type-material text {
+  fill: black;
+  text-shadow: white 0px 0px 2px;
+  filter: url(#solid);
+}
+.ipysankeywidget.SankeyWidgetView svg .node.offstage text {
+  display: none;
+}
+.ipysankeywidget.SankeyWidgetView svg .node.offstage:hover text {
+  display: block;
+}
