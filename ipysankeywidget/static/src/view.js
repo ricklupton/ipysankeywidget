@@ -42,11 +42,7 @@ module.exports = function createView(widget) {
     },
 
     value_changed: function() {
-      // clone so that cyclic references created by layout don't upset
-      // ipywidgets' state-saving machinery.
       var value = this.model.get('value');
-
-      console.log('value', value);
 
       var el = d3.select(this.$el[0])
             .datum(value)

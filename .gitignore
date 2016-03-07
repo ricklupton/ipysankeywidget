@@ -77,3 +77,6 @@ target/
 
 /node_modules
 /venv
+.tern-port
+/ipysankeywidget/static/ipysankeywidget/css
+/ipysankeywidget/static/ipysankeywidget/js/view.js
