@@ -13,6 +13,8 @@ var sankeyDiagram = require('d3-sankey-diagram');
 
 
 module.exports = function createView(widget) {
+  var color = d3.scale.category10();
+
   var SankeyWidgetView = widget.DOMWidgetView.extend({
     // namespace your CSS so that you don't break other people's stuff
     className: 'ipysankeywidget SankeyWidgetView',
@@ -28,7 +30,9 @@ module.exports = function createView(widget) {
       this.diagram = sankeyDiagram()
         .width(this.model.get('width'))
         .height(this.model.get('height'))
-        .margins(this.model.get('margins'));
+        .margins(this.model.get('margins'))
+        .nodeTitle(function(d) { return d.data.title !== undefined ? d.data.title : d.id; })
+        .linkColor(function(d) { return color(d.data.material); });
 
       this.diagram.on('selectNode', this.node_selected.bind(this));
 

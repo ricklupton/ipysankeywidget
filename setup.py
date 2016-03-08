@@ -25,7 +25,7 @@ setup(
     name='ipysankeywidget',
     version=__version__,
     description='IPython Sankey diagram widget',
-    long_description=open('README.rst').read(),
+    long_description=open('README.md').read(),
     author='Rick Lupton',
     author_email='rcl33@cam.ac.uk',
     url='https://github.com/ricklupton/ipysankeywidget',
