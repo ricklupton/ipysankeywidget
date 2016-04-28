@@ -8,11 +8,13 @@
  */
 
 var d3 = require('d3');
+window.d3 = d3;  // for d3-sankey-diagram
+
 var utils = require('./utils');
 var sankeyDiagram = require('d3-sankey-diagram');
-
-
 var saveSvgAsPng = require('save-svg-as-png');
+
+
 module.exports = function createView(widget) {
   var color = d3.scale.category10();
 
@@ -33,7 +35,8 @@ module.exports = function createView(widget) {
         .height(this.model.get('height'))
         .margins(this.model.get('margins'))
         .nodeTitle(function(d) { return d.data.title !== undefined ? d.data.title : d.id; })
-        .linkColor(function(d) { return color(d.data.material); });
+        .materialTitle(function(d) { return d.data.title; })
+        .linkColor(function(d) { return d.data.color !== undefined ? d.data.color : color(d.data.material); });
 
       this.diagram.on('selectNode', this.node_selected.bind(this));
 
@@ -63,9 +66,9 @@ module.exports = function createView(widget) {
       el.selectAll('.link')
       // .style('fill', '#333')
         .style('opacity', 0.5);
-      // el.selectAll('line')
-      //   .style('stroke', 'black')
-      //   .style('stroke-width', '1px');
+      el.selectAll('line')
+        .style('stroke', 'black')
+        .style('stroke-width', '1px');
       el.selectAll('rect')
         .style('fill', 'none');
 
