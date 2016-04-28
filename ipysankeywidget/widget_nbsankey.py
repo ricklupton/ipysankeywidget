@@ -3,6 +3,7 @@
 # Import widgets, provisioners and traitlets
 from ipywidgets import DOMWidget, CallbackDispatcher
 from traitlets import Unicode, List, Dict, CInt
+import base64
 
 
 class SankeyWidget(DOMWidget):
@@ -37,11 +38,16 @@ class SankeyWidget(DOMWidget):
     height = CInt(500, sync=True)
     margins = Dict({}, sync=True)
 
+    # Get image data back
+    png = Unicode('', sync=True)
+
     def __init__(self, **kwargs):
         """Constructor"""
         super(SankeyWidget, self).__init__(**kwargs)
         self._selected_handlers = CallbackDispatcher()
+        self._auto_png_filename = None
         self.on_msg(self._handle_sankey_msg)
+        self.observe(self._on_png_data, names=['png'])
 
     def on_selected(self, callback, remove=False):
         """Register a callback to execute when a node is selected.
@@ -65,5 +71,20 @@ class SankeyWidget(DOMWidget):
         if content.get('event', '') == 'selected':
             self._selected_handlers(self, content.get('node'))
 
+    def _on_png_data(self, change):
+        if change['type'] != 'change': return
+        if self._auto_png_filename:
+            self.save_png(self._auto_png_filename)
+            self._auto_png_filename = None
+
     def set_scale(self, scale=None):
         self.send({"method": "set_scale", "value": scale})
+
+    def save_png(self, filename):
+        data = base64.decodebytes(bytes(self.png, 'ascii'))
+        with open(filename, 'wb') as f:
+            f.write(data)
+
+    def auto_save_png(self, filename):
+        self._auto_png_filename = filename
+        return self

@@ -20,6 +20,7 @@
   },
   "dependencies": {
     "d3": "~3.5.16",
-    "d3-sankey-diagram": "~0.1.0"
+    "d3-sankey-diagram": "~0.1.0",
+    "save-svg-as-png": "~1.0.2"
   }
 }

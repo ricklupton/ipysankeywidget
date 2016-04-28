@@ -12,6 +12,7 @@ var utils = require('./utils');
 var sankeyDiagram = require('d3-sankey-diagram');
 
 
+var saveSvgAsPng = require('save-svg-as-png');
 module.exports = function createView(widget) {
   var color = d3.scale.category10();
 
@@ -67,6 +68,14 @@ module.exports = function createView(widget) {
       //   .style('stroke-width', '1px');
       el.selectAll('rect')
         .style('fill', 'none');
+
+      // get svg - after a delay, so animations have finished
+      setTimeout(() => {
+        saveSvgAsPng.svgAsPngUri(el.select('svg').node(), {}, (uri) => {
+          this.model.set('png', uri.slice(22));
+          this.touch();
+        });
+      }, 800);
     },
 
     margins_changed: function() {
