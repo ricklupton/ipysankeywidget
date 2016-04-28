@@ -11,7 +11,7 @@
 
   define([
     // ipython API
-    'widgets/js/widget',
+    'jupyter-js-widgets',
 
     // local imports
     './view',
