@@ -8,6 +8,7 @@
     "test": "echo \"Error: no test specified\" && exit 1",
     "jshint": "jshint ipysankeywidget/static/ipysankeywidget/js/*.js",
     "build": "browserify -d -s ipysankeywidget_view -x jquery ipysankeywidget/static/src/*.js > ipysankeywidget/static/ipysankeywidget/js/view.js",
+    "build:watch": "watchify -d -s ipysankeywidget_view -x jquery ipysankeywidget/static/src/view.js -o ipysankeywidget/static/ipysankeywidget/js/view.js -v",
     "less": "lessc ipysankeywidget/static/less/widget_nbsankey.less ipysankeywidget/static/ipysankeywidget/css/widget_nbsankey.css"
   },
   "author": "Rick Lupton",
@@ -16,7 +17,8 @@
     "casperjs": "*",
     "less": "*",
     "jshint": "*",
-    "browserify": "~13.0.0"
+    "browserify": "~13.0.0",
+    "watchify": "~3.7.0"
   },
   "dependencies": {
     "d3": "~3.5.16",
