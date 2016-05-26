@@ -1,50 +1,29 @@
-# -*- coding: utf-8 -*-
-
-# Import widgets, provisioners and traitlets
-from ipywidgets import DOMWidget, CallbackDispatcher
-from traitlets import Unicode, List, Dict, CInt
 import base64
 
+import ipywidgets as widgets
+from traitlets import Unicode, Dict, CInt
 
-class SankeyWidget(DOMWidget):
-    '''
-    Sankey widget
-    '''
 
-    # the name of the requirejs module (no .js!)
-    _view_module = Unicode(
-        'nbextensions/ipysankeywidget/js/widget_nbsankey',
-        sync=True)
+class SankeyWidget(widgets.DOMWidget):
+    """Sankey widget"""
+    _view_name = Unicode('SankeyView').tag(sync=True)
+    _model_name = Unicode('SankeyModel').tag(sync=True)
+    _view_module = Unicode('jupyter-sankey-widget').tag(sync=True)
+    _model_module = Unicode('jupyter-sankey-widget').tag(sync=True)
 
-    # the name of the Backbone.View subclass to be used
-    _view_name = Unicode(
-        'SankeyWidgetView',
-        sync=True
-    )
+    value = Dict({}).tag(sync=True)
 
-    # the name of the CSS file to load with this widget
-    _view_style = Unicode(
-        'nbextensions/ipysankeywidget/css/widget_nbsankey',
-        sync=True
-    )
-
-    ########################################################
-    # Actual values
-
-    value = Dict({'nodes': [], 'edges': []}, sync=True)
-    slice_titles = List(sync=True)
-
-    width = CInt(900, sync=True)
-    height = CInt(500, sync=True)
-    margins = Dict({}, sync=True)
+    width = CInt(900).tag(sync=True)
+    height = CInt(500).tag(sync=True)
+    margins = Dict({}).tag(sync=True)
 
     # Get image data back
-    png = Unicode('', sync=True)
+    png = Unicode('').tag(sync=True)
 
     def __init__(self, **kwargs):
         """Constructor"""
         super(SankeyWidget, self).__init__(**kwargs)
-        self._selected_handlers = CallbackDispatcher()
+        self._selected_handlers = widgets.CallbackDispatcher()
         self._auto_png_filename = None
         self.on_msg(self._handle_sankey_msg)
         self.observe(self._on_png_data, names=['png'])
