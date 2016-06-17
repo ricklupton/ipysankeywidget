@@ -13,8 +13,6 @@ class SankeyWidget(widgets.DOMWidget):
 
     value = Dict({}).tag(sync=True)
 
-    width = CInt(900).tag(sync=True)
-    height = CInt(500).tag(sync=True)
     margins = Dict({}).tag(sync=True)
 
     # Get image data back

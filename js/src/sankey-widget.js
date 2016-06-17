@@ -21,8 +21,6 @@ var SankeyModel = widgets.DOMWidgetModel.extend({
     _model_module : 'jupyter-sankey-widget',
     _view_module : 'jupyter-sankey-widget',
     value : {},
-    width : 900,
-    height : 500,
     margins : {},
     png : '',
   })
@@ -32,20 +30,19 @@ var SankeyModel = widgets.DOMWidgetModel.extend({
 // Custom View. Renders the widget model.
 var SankeyView = widgets.DOMWidgetView.extend({
   render: function() {
-    // // add a stylesheet, if defined in `_view_style`
-    // this.loadCss();
-
-    var model = this.model;
+    var layout = this.model.get('layout'),
+        width = parseInt(layout.get('width') || "600", 10),
+        height = parseInt(layout.get('height') || "400", 10);
 
     var color = d3.scale.category20();
 
     this.diagram = sankeyDiagram()
-      .width(this.model.get('width'))
-      .height(this.model.get('height'))
+      .width(width)
+      .height(height)
       .margins(this.model.get('margins'))
       .nodeTitle(function(d) { return d.data.title !== undefined ? d.data.title : d.id; })
-      .materialTitle(function(d) { return d.data.title; })
-      .linkColor(function(d) { return d.data.color !== undefined ? d.data.color : color(d.data.material); });
+      .linkTypeTitle(function(d) { return d.data.title; })
+      .linkColor(function(d) { return d.data.color !== undefined ? d.data.color : color(d.data.type); });
 
     this.diagram.on('selectNode', this.node_selected.bind(this));
 
@@ -59,25 +56,37 @@ var SankeyView = widgets.DOMWidgetView.extend({
   value_changed: function() {
     var value = this.model.get('value');
 
+    var layout = this.model.get('layout'),
+        width = parseInt(layout.get('width') || "600", 10),
+        height = parseInt(layout.get('height') || "400", 10);
+
     var el = d3.select(this.el)
           .datum(value)
           .call(this.diagram);
 
     // put default styles inline
     el.select('svg')
-      .attr('viewBox', '0 0 ' + this.model.get('width') +
-            ' ' + this.model.get('height'))
+      .attr('viewBox', '0 0 ' + width + ' ' + height)
       .style('font-family',
              '"Helvetica Neue", Helvetica, Arial, sans-serif');
 
     el.selectAll('.link')
-    // .style('fill', '#333')
-      .style('opacity', 0.5);
+      .style('opacity', 0.8);
+
     el.selectAll('line')
-      .style('stroke', 'black')
-      .style('stroke-width', '1px');
+      .style('stroke', d => style(d) === 'process' ? '#888' : '#000')
+      .style('stroke-width', d => style(d) === 'process' ? '4px' : '1px');
+
     el.selectAll('rect')
       .style('fill', 'none');
+
+    el.selectAll('.group').select('rect')
+      .style('fill', '#eee')
+      .style('stroke', '#bbb')
+      .style('stroke-width', '0.5');
+
+    el.selectAll('.group').select('text')
+      .style('fill', '#999');
 
     // get svg - after a delay, so animations have finished
     setTimeout(() => {
@@ -111,6 +120,11 @@ var SankeyView = widgets.DOMWidgetView.extend({
     }
   },
 });
+
+
+function style(d) {
+  return (d.data || {}).style;
+}
 
 
 module.exports = {
