@@ -1,6 +1,6 @@
 {
   "name": "jupyter-sankey-widget",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "description": "Display Sankey diagrams in Jupyter",
   "author": "Rick Lupton",
   "main": "src/index.js",
@@ -8,6 +8,7 @@
     "type": "git",
     "url": "https://github.com/ricklupton/ipysankeywidget.git"
   },
+  "license": "MIT",
   "keywords": [
     "jupyter",
     "widgets",
