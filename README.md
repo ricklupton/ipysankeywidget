@@ -19,6 +19,14 @@ For a development installation (requires npm),
     $ jupyter nbextension install --py --symlink --user ipysankeywidget
     $ jupyter nbextension enable --py --user ipysankeywidget
     
+Documentation
+-------------
+
+See the
+[d3-sankey-diagram API docs](https://github.com/ricklupton/d3-sankey-diagram/wiki):
+the `value` of the `SankeyWidget` is exactly the same as the `sankey` object
+described there.
+
 Examples
 --------
 
