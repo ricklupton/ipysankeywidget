@@ -80,13 +80,12 @@ class SankeyWidget(widgets.DOMWidget):
         if change['type'] != 'change':
             return
         if self._auto_svg_filename:
-            self.save_svg(self._auto_png_filename)
+            self.save_svg(self._auto_svg_filename)
             self._auto_svg_filename = None
 
     def save_svg(self, filename):
-        data = base64.decodebytes(bytes(self.png, 'ascii'))
-        with open(filename, 'wb') as f:
-            f.write(data)
+        with open(filename, 'w') as f:
+            f.write(self.svg)
 
     def auto_save_svg(self, filename):
         self._auto_svg_filename = filename
