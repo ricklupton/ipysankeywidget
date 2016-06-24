@@ -8,6 +8,13 @@ window.d3 = d3;  // for d3-sankey-diagram
 var sankeyDiagram = require('d3-sankey-diagram');
 var saveSvgAsPng = require('save-svg-as-png');
 
+var _serializer = new XMLSerializer();
+var serialize = function(node){
+  return '<?xml version="1.0" standalone="no"?>'
+    + '<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">' +
+    _serializer.serializeToString(node);
+};
+
 // Custom Model. Custom widgets models must at least provide default values
 // for model attributes, including `_model_name`, `_view_name`, `_model_module`
 // and `_view_module` when different from the base class.
@@ -23,6 +30,7 @@ var SankeyModel = widgets.DOMWidgetModel.extend({
     value : {},
     margins : {},
     png : '',
+    svg : '',
   })
 });
 
@@ -94,6 +102,10 @@ var SankeyView = widgets.DOMWidgetView.extend({
         this.model.set('png', uri.slice(22));
         this.touch();
       });
+
+      // create a file blob of our SVG.
+      this.model.set('svg', serialize(el.select('svg').node()));
+      this.touch();
     }, 800);
   },
 
