@@ -1,3 +1,4 @@
+import warnings
 import base64
 
 import ipywidgets as widgets
@@ -56,6 +57,13 @@ class SankeyWidget(widgets.DOMWidget):
             self._selected_handlers(self, content.get('node'))
 
     def set_scale(self, scale=None):
+        """Set or reset the diagram scale (width of lines).
+
+        Parameters
+        ----------
+        save : float or None
+            None resets the scale automatically
+        """
         self.send({"method": "set_scale", "value": scale})
 
     @observe("png")
@@ -67,11 +75,32 @@ class SankeyWidget(widgets.DOMWidget):
             self._auto_png_filename = None
 
     def save_png(self, filename):
+        """Save the diagram to a PNG file.
+
+        The widget must be displayed first before the PNG data is available. To
+        display the widget and save an image at the same time, use
+        `auto_save_png`.
+
+        Parameters
+        ----------
+        filename : string
+        """
+        if not self.png:
+            warnings.warn('No png image available! Try auto_save_png() instead?')
         data = base64.decodebytes(bytes(self.png, 'ascii'))
         with open(filename, 'wb') as f:
             f.write(data)
 
     def auto_save_png(self, filename):
+        """Save the diagram to a PNG file, once it has been rendered.
+
+        This waits for the diagram to be rendered, then automatically calls
+        `save_png` for you.
+
+        Parameters
+        ----------
+        filename : string
+        """
         self._auto_png_filename = filename
         return self
 
@@ -84,9 +113,30 @@ class SankeyWidget(widgets.DOMWidget):
             self._auto_svg_filename = None
 
     def save_svg(self, filename):
+        """Save the diagram to an SVG file.
+
+        The widget must be displayed first before the SVG data is available. To
+        display the widget and save an image at the same time, use
+        `auto_save_svg`.
+
+        Parameters
+        ----------
+        filename : string
+        """
+        if not self.svg:
+            warnings.warn('No svg image available! Try auto_save_svg() instead?')
         with open(filename, 'w') as f:
-            f.write(self.svg)
+            f.write(self.svg.encode('utf8'))
 
     def auto_save_svg(self, filename):
+        """Save the diagram to an SVG file, once it has been rendered.
+
+        This waits for the diagram to be rendered, then automatically calls
+        `save_svg` for you.
+
+        Parameters
+        ----------
+        filename : string
+        """
         self._auto_svg_filename = filename
         return self
