@@ -26,7 +26,7 @@
   },
   "dependencies": {
     "d3": "^3.5.17",
-    "d3-sankey-diagram": "^0.3.3",
+    "d3-sankey-diagram": "^0.4.4",
     "jupyter-js-widgets": "^1.1.1",
     "save-svg-as-png": "^1.0.3",
     "underscore": "^1.8.3"
