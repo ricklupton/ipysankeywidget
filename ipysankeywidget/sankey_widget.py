@@ -85,11 +85,12 @@ class SankeyWidget(widgets.DOMWidget):
         ----------
         filename : string
         """
-        if not self.png:
+        if self.png:
+            data = base64.decodebytes(bytes(self.png, 'ascii'))
+            with open(filename, 'wb') as f:
+                f.write(data)
+        else:
             warnings.warn('No png image available! Try auto_save_png() instead?')
-        data = base64.decodebytes(bytes(self.png, 'ascii'))
-        with open(filename, 'wb') as f:
-            f.write(data)
 
     def auto_save_png(self, filename):
         """Save the diagram to a PNG file, once it has been rendered.
@@ -123,10 +124,11 @@ class SankeyWidget(widgets.DOMWidget):
         ----------
         filename : string
         """
-        if not self.svg:
+        if self.svg:
+            with open(filename, 'wb') as f:
+                f.write(self.svg.encode('utf8'))
+        else:
             warnings.warn('No svg image available! Try auto_save_svg() instead?')
-        with open(filename, 'w') as f:
-            f.write(self.svg.encode('utf8'))
 
     def auto_save_svg(self, filename):
         """Save the diagram to an SVG file, once it has been rendered.
