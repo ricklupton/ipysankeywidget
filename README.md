@@ -19,6 +19,11 @@ For a development installation (requires npm),
     $ jupyter nbextension install --py --symlink --user ipysankeywidget
     $ jupyter nbextension enable --py --user ipysankeywidget
     
+Browser support
+---------------
+
+Tested in Firefox and Chrome. [There have been reports](https://github.com/ricklupton/ipysankeywidget/issues/2) that it's not working in Safari.
+    
 Documentation
 -------------
 
