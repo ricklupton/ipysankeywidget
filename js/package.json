@@ -30,7 +30,7 @@
     "d3-transition": "^1.0.4",
     "d3-scale": "^1.0.5",
     "jupyter-js-widgets": "^2.1.4",
-    "save-svg-as-png": "^1.2.0",
+    "save-svg-as-png": "ricklupton/saveSvgAsPng#dont-load-about-blank",
     "underscore": "^1.8.3"
   }
 }
