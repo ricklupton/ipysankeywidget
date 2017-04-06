@@ -47,36 +47,21 @@ var SankeyModel = widgets.DOMWidgetModel.extend({
 // Custom View. Renders the widget model.
 var SankeyView = widgets.DOMWidgetView.extend({
   render: function() {
-    var widgetLayout = this.model.get('layout'),
-        width = parseInt(widgetLayout.get('width') || "600", 10),
-        height = parseInt(widgetLayout.get('height') || "400", 10);
-
     var color = d3Scale.scaleOrdinal(d3Scale.schemeCategory20);
 
     this.sankeyLayout = sankeyDiagram.sankeyLayout();
-        // .edgeValue(function (d) { return d.data.values[i]; })
-        // .size([width - margin.left - margin.right, height - margin.top - margin.bottom]);
 
-    // var G = layout(d3.graphify()(nodes, edges).assignRanks().sortNodes());
     this.diagram = sankeyDiagram.sankeyDiagram()
-      .margins(this.model.get('margins'))
       .nodeTitle(function(d) { return d.data.title !== undefined ? d.data.title : d.id; })
       .linkTypeTitle(function(d) { return d.data.title; })
       .linkColor(function(d) { return d.data.color !== undefined ? d.data.color : color(d.data.type); });
 
     select(this.el).append('svg');
-    // this.diagram = sankeyDiagram()
-    //   .width(width)
-    //   .height(height)
-    //   .margins(this.model.get('margins'))
-    //   .nodeTitle(function(d) { return d.data.title !== undefined ? d.data.title : d.id; })
-    //   .linkTypeTitle(function(d) { return d.data.title; })
-    //   .linkColor(function(d) { return d.data.color !== undefined ? d.data.color : color(d.data.type); });
 
     this.diagram.on('selectNode', this.node_selected.bind(this));
 
     this.value_changed();
-    this.model.on('change:links change:nodes change:order change:rank_sets change:align_link_types change:scale change:margins', this.value_changed, this);
+    this.model.on('change:layout change:links change:nodes change:order change:rank_sets change:align_link_types change:scale change:margins', this.value_changed, this);
     // this.model.on('change:links', this.value_changed, this);
     // this.model.on('change:nodes', this.value_changed, this);
     // this.model.on('change:order', this.value_changed, this);
@@ -89,12 +74,13 @@ var SankeyView = widgets.DOMWidgetView.extend({
 
   value_changed: function() {
     var that = this;
-    // var value = this.model.get('value');
 
     var widgetLayout = this.model.get('layout'),
         width = parseInt(widgetLayout.get('width') || "600", 10),
-        height = parseInt(widgetLayout.get('height') || "400", 10),
-        margins = this.model.get('margins');
+        height = parseInt(widgetLayout.get('height') || "400", 10);
+
+    var margins = _.extend({top: 10, bottom: 10, left: 100, right: 100},
+                           this.model.get('margins'));
 
     // Set scale if defined; otherwise it will be set automatically
     this.sankeyLayout.scale(this.model.get('scale'));
@@ -109,7 +95,6 @@ var SankeyView = widgets.DOMWidgetView.extend({
                                      this.model.get('links'));
 
     var order = this.model.get('order');
-    console.log('order', order);
     if (order && order.length > 0) {
       G.ordering(order);
     } else {
