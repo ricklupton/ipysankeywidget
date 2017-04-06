@@ -1,9 +1,6 @@
-Examples:
+Examples (view on nbviewer to see embedded Sankey widgets):
 
-> [<i class="fa fa-2x fa-paper-plane text-info fa-fw"> </i> Simple example](./Simple example.ipynb)
->
-> [<i class="fa fa-2x fa-space-shuttle text-info fa-fw"> </i> Advanced examples](./More examples.ipynb)
->
-> [<i class="fa fa-2x fa-link text-info fa-fw"> </i> Linking and Layout](./Linking and Layout.ipynb)
->
-> [<i class="fa fa-2x fa-image text-info fa-fw"> </i> Exporting Images](./Exporting Images.ipynb)
+- [Simple example](http://nbviewer.jupyter.org/github/ricklupton/ipysankeywidget/blob/master/examples/Simple example.ipynb)
+- [Advanced examples](http://nbviewer.jupyter.org/github/ricklupton/ipysankeywidget/blob/master/examples//More examples.ipynb)
+- [Linking and Layout](http://nbviewer.jupyter.org/github/ricklupton/ipysankeywidget/blob/master/examples//Linking and Layout.ipynb)
+- [Exporting Images](http://nbviewer.jupyter.org/github/ricklupton/ipysankeywidget/blob/master/examples//Exporting Images.ipynb)
