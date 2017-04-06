@@ -3,7 +3,10 @@ import base64
 
 import ipywidgets as widgets
 from traitlets import (
+    Float,
     Dict,
+    List,
+    Bool,
     observe,
     Unicode,
 )
@@ -15,9 +18,17 @@ class SankeyWidget(widgets.DOMWidget):
     _model_name = Unicode('SankeyModel').tag(sync=True)
     _view_module = Unicode('jupyter-sankey-widget').tag(sync=True)
     _model_module = Unicode('jupyter-sankey-widget').tag(sync=True)
+    _view_module_version = Unicode('^0.2.0').tag(sync=True)
+    _model_module_version = Unicode('^0.2.0').tag(sync=True)
 
-    value = Dict({}).tag(sync=True)
+    links = List([]).tag(sync=True)
+    nodes = List([]).tag(sync=True)
+    order = List(None, allow_none=True).tag(sync=True)
 
+    # Options
+    rank_sets = List([]).tag(sync=True)
+    align_link_types = Bool(False).tag(sync=True)
+    scale = Float(None, allow_none=True).tag(sync=True)
     margins = Dict({}).tag(sync=True)
 
     # Get raster image data back
@@ -55,16 +66,6 @@ class SankeyWidget(widgets.DOMWidget):
             Content of the msg."""
         if content.get('event', '') == 'selected':
             self._selected_handlers(self, content.get('node'))
-
-    def set_scale(self, scale=None):
-        """Set or reset the diagram scale (width of lines).
-
-        Parameters
-        ----------
-        save : float or None
-            None resets the scale automatically
-        """
-        self.send({"method": "set_scale", "value": scale})
 
     @observe("png")
     def _on_png_data(self, change):
