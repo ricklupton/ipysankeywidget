@@ -28,8 +28,8 @@ var SankeyModel = widgets.DOMWidgetModel.extend({
     _view_name : 'SankeyView',
     _model_module : 'jupyter-sankey-widget',
     _view_module : 'jupyter-sankey-widget',
-    _model_module_version : '0.2.0',
-    _view_module_version : '0.2.0',
+    _model_module_version : '0.2.1',
+    _view_module_version : '0.2.1',
 
     links: [],
     nodes: [],
