@@ -5,6 +5,8 @@ Display Sankey diagrams in IPython / Jupyter notebook using [d3-sankey-diagram](
 Installation
 ------------
 
+**Prerequesites**: You need to have installed and enabled [`ipywidgets`](https://github.com/jupyter-widgets/ipywidgets). If installing with pip, make sure to have enabled it by running `jupyter nbextension enable --py --sys-prefix widgetsnbextension`. Installing using conda does this automatically.
+
 To install use pip:
 
     $ pip install ipysankeywidget
