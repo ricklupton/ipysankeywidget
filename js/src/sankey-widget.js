@@ -4,6 +4,7 @@ var _ = require('underscore');
 var select = require('d3-selection').select;
 var d3Scale = require('d3-scale');
 var d3Transition = require('d3-transition');
+var d3Format = require('d3-format');
 
 // var utils = require('./utils');
 var sankeyDiagram = require('d3-sankey-diagram');
@@ -34,6 +35,7 @@ var SankeyModel = widgets.DOMWidgetModel.extend({
     links: [],
     nodes: [],
     order: null,
+    groups: [],
     rank_sets: [],
     align_link_types: false,
     scale : null,
@@ -43,33 +45,50 @@ var SankeyModel = widgets.DOMWidgetModel.extend({
   })
 });
 
+function alignLinkTypes(layout, align) {
+  return layout
+    .sourceId(function(d) { return { id: typeof d.source === "object" ? d.source.id : d.source,
+                                     port: align ? d.type : null }; })
+    .targetId(function(d) { return { id: typeof d.target === "object" ? d.target.id : d.target,
+                                     port: align ? d.type : null }; });
+}
+
+function nodeTitle(d) {
+  return d.title !== undefined ? d.title : d.id;
+}
+
+function linkTypeTitle(d) {
+  return d.title !== undefined ? d.title : d.type;
+}
+
+var color = d3Scale.scaleOrdinal(d3Scale.schemeCategory20);
+function linkColor(d) {
+  return d.color !== undefined ? d.color : color(d.type);
+}
+
+var fmt = d3Format.format('.3s');
+
+var linkTitle = sankeyDiagram.sankeyLinkTitle(nodeTitle, linkTypeTitle, fmt);
 
 // Custom View. Renders the widget model.
 var SankeyView = widgets.DOMWidgetView.extend({
   render: function() {
-    var color = d3Scale.scaleOrdinal(d3Scale.schemeCategory20);
+    // var color = d3Scale.scaleOrdinal(d3Scale.schemeCategory20);
 
-    this.sankeyLayout = sankeyDiagram.sankeyLayout();
+    this.sankeyLayout = sankeyDiagram.sankey();
 
     this.diagram = sankeyDiagram.sankeyDiagram()
-      .nodeTitle(function(d) { return d.data.title !== undefined ? d.data.title : d.id; })
-      .linkTypeTitle(function(d) { return d.data.title; })
-      .linkColor(function(d) { return d.data.color !== undefined ? d.data.color : color(d.data.type); });
+      .nodeTitle(nodeTitle)
+      .linkTitle(linkTitle)
+      .linkColor(linkColor);
 
     select(this.el).append('svg');
 
     this.diagram.on('selectNode', this.node_selected.bind(this));
 
     this.value_changed();
-    this.model.on('change:layout change:links change:nodes change:order change:rank_sets change:align_link_types change:scale change:margins', this.value_changed, this);
-    // this.model.on('change:links', this.value_changed, this);
-    // this.model.on('change:nodes', this.value_changed, this);
-    // this.model.on('change:order', this.value_changed, this);
-    // this.model.on('change:rank_sets', this.value_changed, this);
-    // this.model.on('change:align_link_types', this.value_changed, this);
-    // this.model.on('change:scale', this.value_changed, this);
-    // this.model.on('change:margins', this.value_changed, this);
-    // this.model.on('change:slice_titles', this.titles_changed, this);
+    this.model.on('change:layout change:links change:nodes change:order change:groups change:rank_sets ' +
+                  'change:align_link_types change:scale change:margins', this.value_changed, this);
   },
 
   value_changed: function() {
@@ -86,27 +105,22 @@ var SankeyView = widgets.DOMWidgetView.extend({
     this.sankeyLayout.scale(this.model.get('scale'));
 
     // Layout
-    this.diagram.margins(margins);
-    this.sankeyLayout
-      .size([width - margins.left - margins.right, height - margins.top - margins.bottom]);
-    // .edgeValue(function (d) { return d.data.values[i]; })
-
-    var G = sankeyDiagram.graphify()(this.model.get('nodes'),
-                                     this.model.get('links'));
-
     var order = this.model.get('order');
-    if (order && order.length > 0) {
-      G.ordering(order);
-    } else {
-      G.assignRanks(this.model.get('rank_sets'));
-      G.sortNodes();
-    }
+    this.diagram
+      .margins(margins)
+      .groups(this.model.get('groups'));
+    this.sankeyLayout
+      .size([width - margins.left - margins.right, height - margins.top - margins.bottom])
+      .ordering(order && order.length ? order : null)
+      .rankSets(this.model.get('rank_sets'));
 
-    this.sankeyLayout.alignLinkTypes(this.model.get('align_link_types'));
-    this.sankeyLayout(G);
+    alignLinkTypes(this.sankeyLayout, this.model.get('align_link_types'));
 
-    var el = select(this.el).select('svg')
-        .datum(G)
+    var graph = this.sankeyLayout({nodes: this.model.get('nodes'), links: this.model.get('links')});
+
+    var el = select(this.el)
+        .select('svg')
+        .datum(graph)
         .transition()
         .duration(500)
         .call(this.diagram);
@@ -124,8 +138,8 @@ var SankeyView = widgets.DOMWidgetView.extend({
       .style('opacity', 0.8);
 
     el.selectAll('line')
-      .style('stroke', function(d) { return style(d) === 'process' ? '#888' : '#000'; })
-      .style('stroke-width', function(d) { return style(d) === 'process' ? '4px' : '1px'; });
+      .style('stroke', function(d) { return d.style === 'process' ? '#888' : '#000'; })
+      .style('stroke-width', function(d) { return d.style === 'process' ? '4px' : '1px'; });
 
     el.selectAll('rect')
       .style('fill', 'none');
@@ -167,11 +181,6 @@ var SankeyView = widgets.DOMWidgetView.extend({
     this.send({event: 'selected', node: (node ? {id: node.id} : null)});
   },
 });
-
-
-function style(d) {
-  return (d.data || {}).style;
-}
 
 
 module.exports = {

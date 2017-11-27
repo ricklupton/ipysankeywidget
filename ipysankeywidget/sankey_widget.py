@@ -24,6 +24,7 @@ class SankeyWidget(widgets.DOMWidget):
     links = List([]).tag(sync=True)
     nodes = List([]).tag(sync=True)
     order = List(None, allow_none=True).tag(sync=True)
+    groups = List([]).tag(sync=True)
 
     # Options
     rank_sets = List([]).tag(sync=True)
@@ -39,6 +40,18 @@ class SankeyWidget(widgets.DOMWidget):
 
     def __init__(self, **kwargs):
         """Constructor"""
+
+        # Automatically create nodes
+        nodes = kwargs.get('nodes', [])
+        node_ids = {node['id'] for node in nodes}
+        missing_ids = set()
+        for link in kwargs.get('links', []):
+            if link['source'] not in node_ids:
+                missing_ids.add(link['source'])
+            if link['target'] not in node_ids:
+                missing_ids.add(link['target'])
+        kwargs['nodes'] = nodes + [{'id': k} for k in missing_ids]
+
         super(SankeyWidget, self).__init__(**kwargs)
         self._selected_handlers = widgets.CallbackDispatcher()
         self._auto_png_filename = None
