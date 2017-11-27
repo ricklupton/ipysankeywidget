@@ -1,0 +1,5 @@
+#!/bin/bash
+
+# This file is used by e.g. Binder to setup the environment
+
+jupyter nbextension enable --py --sys-prefix ipysankeywidget
