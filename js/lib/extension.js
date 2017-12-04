@@ -8,13 +8,12 @@ if (window.require) {
         map: {
             "*" : {
                 "jupyter-sankey-widget": "nbextensions/jupyter-sankey-widget/index",
-                "jupyter-js-widgets": "nbextensions/jupyter-js-widgets/extension"
             }
         }
     });
 }
 
-// Export the required load_ipython_extention
+// Export the required load_ipython_extension
 module.exports = {
     load_ipython_extension: function() {}
 };

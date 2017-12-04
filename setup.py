@@ -76,9 +76,16 @@ class NPM(Command):
     def finalize_options(self):
         pass
 
+    def get_npm_name(self):
+        npm_name = 'npm'
+        if platform.system() == 'Windows':
+            npm_name = 'npm.cmd'
+        return npm_name
+
     def has_npm(self):
+        npm_name = self.get_npm_name()
         try:
-            check_call(['npm', '--version'])
+            check_call([npm_name, '--version'])
             return True
         except:
             return False
@@ -98,14 +105,15 @@ class NPM(Command):
 
         if self.should_run_npm_install():
             log.info("Installing build dependencies with npm.  This may take a while...")
-            check_call(['npm', 'install'], cwd=node_root, stdout=sys.stdout, stderr=sys.stderr)
+            npm_name = self.get_npm_name()
+            check_call([npm_name, 'install'], cwd=node_root, stdout=sys.stdout, stderr=sys.stderr)
             os.utime(self.node_modules, None)
 
         for t in self.targets:
             if not os.path.exists(t):
                 msg = 'Missing file: %s' % t
                 if not has_npm:
-                    msg += '\nnpm is required to build a development version of widgetsnbextension'
+                    msg += '\nnpm is required to build a development version of a widget extension'
                 raise ValueError(msg)
 
         # update package data in case this created new files
@@ -129,7 +137,7 @@ setup_args = {
         ]),
     ],
     'install_requires': [
-        'ipywidgets>=5.1.3',
+        'ipywidgets>=7.0.0',
     ],
     'packages': find_packages(),
     'zip_safe': False,

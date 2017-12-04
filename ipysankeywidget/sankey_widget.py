@@ -12,14 +12,15 @@ from traitlets import (
 )
 
 
+@widgets.register
 class SankeyWidget(widgets.DOMWidget):
     """Sankey widget"""
     _view_name = Unicode('SankeyView').tag(sync=True)
     _model_name = Unicode('SankeyModel').tag(sync=True)
     _view_module = Unicode('jupyter-sankey-widget').tag(sync=True)
     _model_module = Unicode('jupyter-sankey-widget').tag(sync=True)
-    _view_module_version = Unicode('^0.2.1').tag(sync=True)
-    _model_module_version = Unicode('^0.2.1').tag(sync=True)
+    _view_module_version = Unicode('^0.2.2').tag(sync=True)
+    _model_module_version = Unicode('^0.2.2').tag(sync=True)
 
     links = List([]).tag(sync=True)
     nodes = List([]).tag(sync=True)

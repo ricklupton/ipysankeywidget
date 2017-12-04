@@ -1,5 +1,7 @@
-var widgets = require('jupyter-js-widgets');
-var _ = require('underscore');
+var widgets = require('@jupyter-widgets/base');
+var _ = require('lodash');
+
+var semver_range = '~' + require('../package.json').version;
 
 var select = require('d3-selection').select;
 var d3Scale = require('d3-scale');
@@ -24,13 +26,13 @@ var serialize = function(node){
 // When serialiazing entire widget state for embedding, only values different from the
 // defaults will be specified.
 var SankeyModel = widgets.DOMWidgetModel.extend({
-  defaults: _.extend({}, widgets.DOMWidgetModel.prototype.defaults, {
+  defaults: _.extend({}, widgets.DOMWidgetModel.prototype.defaults(), {
     _model_name : 'SankeyModel',
     _view_name : 'SankeyView',
     _model_module : 'jupyter-sankey-widget',
     _view_module : 'jupyter-sankey-widget',
-    _model_module_version : '0.2.1',
-    _view_module_version : '0.2.1',
+    _model_module_version : semver_range,
+    _view_module_version : semver_range,
 
     links: [],
     nodes: [],
