@@ -118,7 +118,10 @@ var SankeyView = widgets.DOMWidgetView.extend({
 
     alignLinkTypes(this.sankeyLayout, this.model.get('align_link_types'));
 
-    var graph = this.sankeyLayout({nodes: this.model.get('nodes'), links: this.model.get('links')});
+    var graph = this.sankeyLayout({
+      nodes: JSON.parse(JSON.stringify(this.model.get('nodes'))),
+      links: JSON.parse(JSON.stringify(this.model.get('links'))),
+    });
 
     var el = select(this.el)
         .select('svg')
