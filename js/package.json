@@ -1,6 +1,6 @@
 {
   "name": "jupyter-sankey-widget",
-  "version": "0.2.2",
+  "version": "0.2.3",
   "description": "Display Sankey diagrams in Jupyter",
   "author": "Rick Lupton",
   "main": "lib/index.js",
