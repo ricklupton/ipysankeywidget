@@ -45,3 +45,11 @@ using
 - [Linking and Layout](http://nbviewer.jupyter.org/github/ricklupton/ipysankeywidget/blob/master/examples/Linking%20and%20Layout.ipynb)
 - [Exporting Images](http://nbviewer.jupyter.org/github/ricklupton/ipysankeywidget/blob/master/examples/Exporting%20Images.ipynb)
 
+Changelog
+-----------
+
+v0.2.4
+=======
+
+- Add events for clicking on nodes and links: `on_node_clicked` and
+  `on_link_clicked`. These replace the `on_selected` event.

@@ -54,22 +54,41 @@ class SankeyWidget(widgets.DOMWidget):
         kwargs['nodes'] = nodes + [{'id': k} for k in missing_ids]
 
         super(SankeyWidget, self).__init__(**kwargs)
-        self._selected_handlers = widgets.CallbackDispatcher()
+
+        self._node_clicked_handlers = widgets.CallbackDispatcher()
+        self._link_clicked_handlers = widgets.CallbackDispatcher()
+
         self._auto_png_filename = None
         self._auto_svg_filename = None
         self.on_msg(self._handle_sankey_msg)
 
-    def on_selected(self, callback, remove=False):
-        """Register a callback to execute when a node is selected.
+    def on_node_clicked(self, callback, remove=False):
+        """Register a callback to execute when a node is clicked.
 
-        The callback will be called with one argument,
-        the Sankey widget instance.
+        The callback will be called with three arguments: the Sankey widget
+        instance, the node, and the index of the node in the nodes list.
 
         Parameters
         ----------
         remove : bool (optional)
-            Set to true to remove the callback from the list of callbacks."""
-        self._selected_handlers.register_callback(callback, remove=remove)
+            Set to true to remove the callback from the list of callbacks.
+
+        """
+        self._node_clicked_handlers.register_callback(callback, remove=remove)
+
+    def on_link_clicked(self, callback, remove=False):
+        """Register a callback to execute when a link is clicked.
+
+        The callback will be called with three arguments: the Sankey widget
+        instance, the link, and the index of the link in the nodes list.
+
+        Parameters
+        ----------
+        remove : bool (optional)
+            Set to true to remove the callback from the list of callbacks.
+
+        """
+        self._link_clicked_handlers.register_callback(callback, remove=remove)
 
     def _handle_sankey_msg(self, _, content, buffers):
         """Handle a msg from the front-end.
@@ -78,8 +97,10 @@ class SankeyWidget(widgets.DOMWidget):
         ----------
         content: dict
             Content of the msg."""
-        if content.get('event', '') == 'selected':
-            self._selected_handlers(self, content.get('node'))
+        if content.get('event', '') == 'node_clicked':
+            self._node_clicked_handlers(self, content.get('node'))
+        if content.get('event', '') == 'link_clicked':
+            self._link_clicked_handlers(self, content.get('link'))
 
     @observe("png")
     def _on_png_data(self, change):

@@ -86,7 +86,8 @@ var SankeyView = widgets.DOMWidgetView.extend({
 
     select(this.el).append('svg');
 
-    this.diagram.on('selectNode', this.node_selected.bind(this));
+    this.diagram.on('selectNode', this.node_clicked.bind(this));
+    this.diagram.on('selectLink', this.link_clicked.bind(this));
 
     this.value_changed();
     this.model.on('change:layout change:links change:nodes change:order change:groups change:rank_sets ' +
@@ -182,8 +183,14 @@ var SankeyView = widgets.DOMWidgetView.extend({
           .call(this.diagram);
   },
 
-  node_selected: function(node) {
-    this.send({event: 'selected', node: (node ? {id: node.id} : null)});
+  node_clicked: function(d) {
+    var node = d ? {id: d.id} : null;
+    this.send({event: 'node_clicked', node: node});
+  },
+
+  link_clicked: function(d) {
+    var link = d ? {source: d.source.id, target: d.target.id, type: d.type, value: d.value} : null;
+    this.send({event: 'link_clicked', link: link});
   },
 });
 
