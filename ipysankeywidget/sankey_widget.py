@@ -51,7 +51,11 @@ class SankeyWidget(widgets.DOMWidget):
                 linktype = link['type']
             else:
                 linktype = None
-            values.append((linksource, linktarget, linktype))
+            if 'color' in link:
+                linkcolor = link['color']
+            else:
+                linkcolor = None
+            values.append((linksource, linktarget, linktype, linkcolor))
         if len(values) != len(set(values)):
             raise ValueError("Links have duplicates")
 
