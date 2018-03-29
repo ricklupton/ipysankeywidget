@@ -42,6 +42,19 @@ class SankeyWidget(widgets.DOMWidget):
     def __init__(self, **kwargs):
         """Constructor"""
 
+        # check for duplicates in links
+        values = []
+        for link in kwargs.get('links', []):
+            linksource = link['source']
+            linktarget = link['target']
+            if 'type' in link:
+                linktype = link['type']
+            else:
+                linktype = None
+            values.append((linksource, linktarget, linktype))
+        if len(values) != len(set(values)):
+            raise ValueError("Links have duplicates")
+
         # Automatically create nodes
         nodes = kwargs.get('nodes', [])
         node_ids = {node['id'] for node in nodes}
