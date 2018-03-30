@@ -43,17 +43,20 @@ class SankeyWidget(widgets.DOMWidget):
         """Constructor"""
 
         # check for duplicates in links
-        values = []
-        for link in kwargs.get('links', []):
+        values = set()
+        for i, link in enumerate(kwargs.get('links', [])):
             linksource = link['source']
             linktarget = link['target']
             if 'type' in link:
                 linktype = link['type']
             else:
                 linktype = None
-            values.append((linksource, linktarget, linktype))
-        if len(values) != len(set(values)):
-            raise ValueError("Links have duplicates")
+            if (linksource, linktarget, linktype) not in values:
+                values.add((linksource, linktarget, linktype))
+            else:
+                raise ValueError('Links has at least one duplicated entry. '
+                                 'The first duplicated item appears at index {0}. '
+                                 'See https://github.com/ricklupton/ipysankeywidget/issues/22'.format(i))
 
         # Automatically create nodes
         nodes = kwargs.get('nodes', [])
