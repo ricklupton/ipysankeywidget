@@ -53,3 +53,9 @@ v0.2.4
 
 - Add events for clicking on nodes and links: `on_node_clicked` and
   `on_link_clicked`. These replace the `on_selected` event.
+- Change figure size using Layout object:
+
+```python
+layout = Layout(width="1000", height="1200")
+SankeyWidget(links=data,layout=layout)
+```
