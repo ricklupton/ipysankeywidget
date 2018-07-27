@@ -13,6 +13,7 @@ To install using pip:
     $ jupyter nbextension enable --py --sys-prefix ipysankeywidget
     
 To install using conda:
+
     $ conda install -c big_cake ipysankeywidget
 
 For a development installation (requires npm),
