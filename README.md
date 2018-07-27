@@ -7,11 +7,13 @@ Installation
 
 **Prerequesites**: You need to have installed and enabled [`ipywidgets`](https://github.com/jupyter-widgets/ipywidgets). If installing with pip, make sure to have enabled it by running `jupyter nbextension enable --py --sys-prefix widgetsnbextension`. Installing using conda does this automatically.
 
-To install use pip:
+To install using pip:
 
     $ pip install ipysankeywidget
     $ jupyter nbextension enable --py --sys-prefix ipysankeywidget
-
+    
+To install using conda:
+    $ conda install -c big_cake ipysankeywidget
 
 For a development installation (requires npm),
 
