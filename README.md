@@ -54,6 +54,7 @@ Changelog
 v0.2.4
 =======
 
+- Ipysankeywidget can now be installed using conda
 - Add events for clicking on nodes and links: `on_node_clicked` and
   `on_link_clicked`. These replace the `on_selected` event.
 - Change figure size using Layout object:
@@ -62,3 +63,8 @@ v0.2.4
 layout = Layout(width="1000", height="1200")
 SankeyWidget(links=data,layout=layout)
 ```
+
+Contributors
+------------
+
+- Ali Alsabbah
