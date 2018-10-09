@@ -7,11 +7,14 @@ Installation
 
 **Prerequesites**: You need to have installed and enabled [`ipywidgets`](https://github.com/jupyter-widgets/ipywidgets). If installing with pip, make sure to have enabled it by running `jupyter nbextension enable --py --sys-prefix widgetsnbextension`. Installing using conda does this automatically.
 
-To install use pip:
+To install using pip:
 
     $ pip install ipysankeywidget
     $ jupyter nbextension enable --py --sys-prefix ipysankeywidget
+    
+To install using conda:
 
+    $ conda install -c big_cake ipysankeywidget
 
 For a development installation (requires npm),
 
@@ -51,6 +54,7 @@ Changelog
 v0.2.4
 =======
 
+- Ipysankeywidget can now be installed using conda
 - Add events for clicking on nodes and links: `on_node_clicked` and
   `on_link_clicked`. These replace the `on_selected` event.
 - Change figure size using Layout object:
@@ -59,3 +63,8 @@ v0.2.4
 layout = Layout(width="1000", height="1200")
 SankeyWidget(links=data,layout=layout)
 ```
+
+Contributors
+------------
+
+- Ali Alsabbah
