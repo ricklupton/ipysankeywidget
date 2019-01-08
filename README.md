@@ -37,6 +37,13 @@ See the
 the `value` of the `SankeyWidget` is exactly the same as the `sankey` object
 described there.
 
+To change the figure size, use the ipywidgets Layout object:
+
+```python
+layout = Layout(width="1000", height="1200")
+SankeyWidget(links=data, layout=layout)
+```
+
 Examples
 --------
 
@@ -51,20 +58,20 @@ using
 Changelog
 -----------
 
-v0.2.4
-=======
+## Unreleased
 
-- Ipysankeywidget can now be installed using conda
+- ipysankeywidget can now be installed using conda (thanks to Ali Alsabbah #33)
+- Add a check for duplicate links (thanks to Remi Bois #23)
+
+## v0.2.4
+
 - Add events for clicking on nodes and links: `on_node_clicked` and
   `on_link_clicked`. These replace the `on_selected` event.
-- Change figure size using Layout object:
-
-```python
-layout = Layout(width="1000", height="1200")
-SankeyWidget(links=data,layout=layout)
-```
 
 Contributors
 ------------
 
+- Nicholas Bollweg
 - Ali Alsabbah
+- Remi Bois
+- Miguel Mendez
