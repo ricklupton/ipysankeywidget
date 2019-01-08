@@ -19,24 +19,29 @@ class SankeyWidget(widgets.DOMWidget):
     _model_name = Unicode('SankeyModel').tag(sync=True)
     _view_module = Unicode('jupyter-sankey-widget').tag(sync=True)
     _model_module = Unicode('jupyter-sankey-widget').tag(sync=True)
-    _view_module_version = Unicode('^0.2.3').tag(sync=True)
-    _model_module_version = Unicode('^0.2.3').tag(sync=True)
+    _view_module_version = Unicode('^0.2.5').tag(sync=True)
+    _model_module_version = Unicode('^0.2.5').tag(sync=True)
 
+    # Data
     links = List([]).tag(sync=True)
     nodes = List([]).tag(sync=True)
+
+    # Layout options
     order = List(None, allow_none=True).tag(sync=True)
     groups = List([]).tag(sync=True)
-
-    # Options
     rank_sets = List([]).tag(sync=True)
     align_link_types = Bool(False).tag(sync=True)
+
+    # Rendering options
     scale = Float(None, allow_none=True).tag(sync=True)
     margins = Dict({}).tag(sync=True)
 
-    # Get raster image data back
-    png = Unicode('').tag(sync=True)
+    # Link label options
+    linkLabelFormat = Unicode('').tag(sync=True)
+    linkLabelMinWidth = Float(5).tag(sync=True)
 
-    # get vector image back
+    # Get raster and vector image data back
+    png = Unicode('').tag(sync=True)
     svg = Unicode('').tag(sync=True)
 
     def __init__(self, **kwargs):

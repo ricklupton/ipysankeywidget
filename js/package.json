@@ -1,6 +1,6 @@
 {
   "name": "jupyter-sankey-widget",
-  "version": "0.2.4",
+  "version": "0.2.5",
   "description": "Display Sankey diagrams in Jupyter",
   "author": "Rick Lupton",
   "main": "lib/index.js",
@@ -31,13 +31,13 @@
     "rimraf": "^2.6.1"
   },
   "dependencies": {
+    "@jupyter-widgets/base": "^1.1.4",
     "d3-format": "^1.2.0",
-    "d3-sankey-diagram": "^0.6.1",
+    "d3-sankey-diagram": "^0.7.3",
     "d3-scale": "^1.0.5",
     "d3-selection": "^1.0.5",
     "d3-transition": "^1.0.4",
-    "@jupyter-widgets/base": "^1.1.4",
-    "save-svg-as-png": "ricklupton/saveSvgAsPng#dont-load-about-blank",
-    "lodash": "^4.17.4"
+    "lodash": "^4.17.4",
+    "save-svg-as-png": "ricklupton/saveSvgAsPng#dont-load-about-blank"
   }
 }

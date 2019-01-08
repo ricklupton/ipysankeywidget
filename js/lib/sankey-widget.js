@@ -44,6 +44,8 @@ var SankeyModel = widgets.DOMWidgetModel.extend({
     margins : {},
     png : '',
     svg : '',
+    linkLabelFormat: '',
+    linkLabelMinWidth: 5,
   })
 });
 
@@ -91,7 +93,9 @@ var SankeyView = widgets.DOMWidgetView.extend({
 
     this.value_changed();
     this.model.on('change:layout change:links change:nodes change:order change:groups change:rank_sets ' +
-                  'change:align_link_types change:scale change:margins', this.value_changed, this);
+                  'change:align_link_types change:scale change:margins change:linkLabelFormat ' +
+                  'change:linkLabelMinWidth',
+                  this.value_changed, this);
   },
 
   value_changed: function() {
@@ -103,6 +107,15 @@ var SankeyView = widgets.DOMWidgetView.extend({
 
     var margins = _.extend({top: 10, bottom: 10, left: 100, right: 100},
                            this.model.get('margins'));
+
+    // Link format string
+    var linkFmtStr = this.model.get('linkLabelFormat'),
+        linkMinWidth = this.model.get('linkLabelMinWidth'),
+        linkFmt = linkFmtStr ? d3Format.format(linkFmtStr) : function(value) { return null; };
+
+    this.diagram.linkLabel(function(d) {
+      return d.dy > linkMinWidth ? linkFmt(d.value) : null;
+    });
 
     // Set scale if defined; otherwise it will be set automatically
     this.sankeyLayout.scale(this.model.get('scale'));
