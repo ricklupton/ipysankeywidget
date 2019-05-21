@@ -1,20 +1,20 @@
-# IPython Sankey diagram widget [![Binder](https://mybinder.org/badge.svg)](https://mybinder.org/v2/gh/ricklupton/ipysankeywidget/master?filepath=examples)
+# IPython Sankey diagram widget [![Binder](https://mybinder.org/badge.svg)](https://mybinder.org/v2/gh/ricklupton/ipysankeywidget/master?filepath=examples) [![Conda Version](https://img.shields.io/conda/vn/conda-forge/ipysankeywidget.svg)](https://anaconda.org/conda-forge/ipysankeywidget) 
 
 Display Sankey diagrams in IPython / Jupyter notebook using [d3-sankey-diagram](https://github.com/ricklupton/d3-sankey-diagram).
 
 Installation
 ------------
 
-**Prerequesites**: You need to have installed and enabled [`ipywidgets`](https://github.com/jupyter-widgets/ipywidgets). If installing with pip, make sure to have enabled it by running `jupyter nbextension enable --py --sys-prefix widgetsnbextension`. Installing using conda does this automatically.
-
 To install using pip:
 
     $ pip install ipysankeywidget
     $ jupyter nbextension enable --py --sys-prefix ipysankeywidget
+    $ jupyter nbextension enable --py --sys-prefix widgetsnbextension   # <-- you might have already done this,
+                                                                        #     but it's safe to do again
     
 To install using conda:
 
-    $ conda install -c big_cake ipysankeywidget
+    $ conda install -c conda-forge ipysankeywidget                # (that's it, nbextensions enabled automatically)
 
 For a development installation (requires npm),
 
@@ -60,6 +60,10 @@ Changelog
 
 ## Unreleased
 
+## v0.2.5
+
+- You can now show link values as SVG text elements. Set `linkLabelFormat` to a [d3-format string](https://github.com/d3/d3-format#locale_format); links whose value is more than `linkLabelMinWidth` will have a label using that format.
+- Upgrade to d3-sankey-diagram version 0.7.3
 - ipysankeywidget can now be installed using conda (thanks to Ali Alsabbah #33)
 - Add a check for duplicate links (thanks to Remi Bois #23)
 
