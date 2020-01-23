@@ -1,6 +1,6 @@
 {
   "name": "jupyter-sankey-widget",
-  "version": "0.2.5",
+  "version": "0.3.0",
   "description": "Display Sankey diagrams in Jupyter",
   "author": "Rick Lupton",
   "main": "lib/index.js",
@@ -14,6 +14,7 @@
     "widgets",
     "ipython",
     "ipywidgets",
+    "jupyterlab-extension",
     "sankey"
   ],
   "files": [
@@ -23,15 +24,16 @@
   "scripts": {
     "clean": "rimraf dist/",
     "prepublish": "webpack",
+    "build": "webpack",
+    "watch": "webpack --watch --mode=development",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "devDependencies": {
-    "json-loader": "^0.5.4",
     "webpack": "^3.5.5",
     "rimraf": "^2.6.1"
   },
   "dependencies": {
-    "@jupyter-widgets/base": "^1.1.4",
+    "@jupyter-widgets/base": "^1.1 || ^2",
     "d3-format": "^1.2.0",
     "d3-sankey-diagram": "^0.7.3",
     "d3-scale": "^1.0.5",
@@ -39,5 +41,8 @@
     "d3-transition": "^1.0.4",
     "lodash": "^4.17.4",
     "save-svg-as-png": "ricklupton/saveSvgAsPng#dont-load-about-blank"
+  },
+  "jupyterlab": {
+    "extension": "lib/labplugin"
   }
 }

@@ -135,6 +135,7 @@ setup_args = {
             'ipysankeywidget/static/index.js',
             'ipysankeywidget/static/index.js.map',
         ]),
+        ('etc/jupyter/nbconfig/notebook.d' ,['ipysankeywidget.json'])
     ],
     'install_requires': [
         'ipywidgets>=7.0.0',
@@ -162,12 +163,11 @@ setup_args = {
         'Intended Audience :: Developers',
         'Intended Audience :: Science/Research',
         'Topic :: Multimedia :: Graphics',
-        'Programming Language :: Python :: 2',
-        'Programming Language :: Python :: 2.7',
         'Programming Language :: Python :: 3',
-        'Programming Language :: Python :: 3.3',
         'Programming Language :: Python :: 3.4',
         'Programming Language :: Python :: 3.5',
+        'Programming Language :: Python :: 3.6',
+        'Programming Language :: Python :: 3.7',
         'License :: OSI Approved :: MIT License',
     ],
 }

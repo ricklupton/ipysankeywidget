@@ -20,11 +20,17 @@ var serialize = function(node){
 };
 
 // Custom Model. Custom widgets models must at least provide default values
-// for model attributes, including `_model_name`, `_view_name`, `_model_module`
-// and `_view_module` when different from the base class.
+// for model attributes, including
 //
-// When serialiazing entire widget state for embedding, only values different from the
-// defaults will be specified.
+//  - `_view_name`
+//  - `_view_module`
+//  - `_view_module_version`
+//
+//  - `_model_name`
+//  - `_model_module`
+//  - `_model_module_version`
+//
+//  when different from the base class.
 var SankeyModel = widgets.DOMWidgetModel.extend({
   defaults: _.extend({}, widgets.DOMWidgetModel.prototype.defaults(), {
     _model_name : 'SankeyModel',

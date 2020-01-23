@@ -2,3 +2,4 @@ include LICENSE
 include README.rst
 recursive-include ipysankeywidget/static *.*
 recursive-include examples *.ipynb
+include ipysankeywidget.json

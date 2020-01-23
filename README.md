@@ -5,25 +5,23 @@ Display Sankey diagrams in IPython / Jupyter notebook using [d3-sankey-diagram](
 Installation
 ------------
 
-To install using pip:
+Option 1: to install using **pip**:
 
     $ pip install ipysankeywidget
+
+Then, if using the classic Jupyter Notebook:
+
     $ jupyter nbextension enable --py --sys-prefix ipysankeywidget
     $ jupyter nbextension enable --py --sys-prefix widgetsnbextension   # <-- you might have already done this,
                                                                         #     but it's safe to do again
-    
-To install using conda:
+Or, if using Jupyterlab:
+
+    $ jupyter labextension install jupyter-sankey-widget @jupyter-widgets/jupyterlab-manager
+
+Option 2: to install using **conda**:
 
     $ conda install -c conda-forge ipysankeywidget                # (that's it, nbextensions enabled automatically)
 
-For a development installation (requires npm),
-
-    $ git clone https://github.com/ricklupton/ipysankeywidget.git
-    $ cd ipysankeywidget
-    $ pip install -e .
-    $ jupyter nbextension install --py --symlink --user ipysankeywidget
-    $ jupyter nbextension enable --py --user ipysankeywidget
-    
 Browser support
 ---------------
 
@@ -58,7 +56,9 @@ using
 Changelog
 -----------
 
-## Unreleased
+## v0.3.0
+
+- Now supports Jupyterlab
 
 ## v0.2.5
 
