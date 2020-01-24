@@ -1,4 +1,4 @@
-# IPython Sankey diagram widget [![Binder](https://mybinder.org/badge.svg)](https://mybinder.org/v2/gh/ricklupton/ipysankeywidget/master?filepath=examples) [![Conda Version](https://img.shields.io/conda/vn/conda-forge/ipysankeywidget.svg)](https://anaconda.org/conda-forge/ipysankeywidget) 
+# IPython Sankey diagram widget [![Binder](https://mybinder.org/badge.svg)](https://mybinder.org/v2/gh/ricklupton/ipysankeywidget/master?urlpath=lab/tree/examples/Simple%20example.ipynb) [![Conda Version](https://img.shields.io/conda/vn/conda-forge/ipysankeywidget.svg)](https://anaconda.org/conda-forge/ipysankeywidget) 
 
 Display Sankey diagrams in IPython / Jupyter notebook using [d3-sankey-diagram](https://github.com/ricklupton/d3-sankey-diagram).
 
@@ -47,7 +47,8 @@ Examples
 
 See notebooks in examples folder for usage examples. You can try these online
 using
-[Binder](https://mybinder.org/v2/gh/ricklupton/ipysankeywidget/master?filepath=examples), or follow the links to static versions on nbviewer:
+[Binder](https://mybinder.org/v2/gh/ricklupton/ipysankeywidget/master?urlpath=lab/tree/examples/Simple%20example.ipynb),
+or follow the links to static versions on nbviewer:
 - [Simple example](http://nbviewer.jupyter.org/github/ricklupton/ipysankeywidget/blob/master/examples/Simple%20example.ipynb)
 - [Advanced examples](http://nbviewer.jupyter.org/github/ricklupton/ipysankeywidget/blob/master/examples/More%20examples.ipynb)
 - [Linking and Layout](http://nbviewer.jupyter.org/github/ricklupton/ipysankeywidget/blob/master/examples/Linking%20and%20Layout.ipynb)

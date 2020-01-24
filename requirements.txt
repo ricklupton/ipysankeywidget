@@ -1,2 +1,3 @@
 # This file is used by e.g. Binder to setup the environment
+jupyterlab==1.2.*
 ipysankeywidget

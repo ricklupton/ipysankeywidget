@@ -2,4 +2,8 @@
 
 # This file is used by e.g. Binder to setup the environment
 
-jupyter nbextension enable --py --sys-prefix ipysankeywidget
+# Enable extension for classic notebook
+jupyter nbextension enable --py --sys-prefix ipysankeywidget widgetsnbextension
+
+# Enable extension for Jupyterlab
+jupyter labextension install jupyter-sankey-widget @jupyter-widgets/jupyterlab-manager
