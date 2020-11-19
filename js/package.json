@@ -35,7 +35,7 @@
   "dependencies": {
     "@jupyter-widgets/base": "^1.1 || ^2",
     "d3-format": "^1.2.0",
-    "d3-sankey-diagram": "ricklupton/d3-sankey-diagram#from-elsewhere-links",
+    "d3-sankey-diagram": "^0.8.0",
     "d3-scale": "^1.0.5",
     "d3-selection": "^1.0.5",
     "d3-transition": "^1.0.4",
