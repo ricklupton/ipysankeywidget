@@ -19,8 +19,8 @@ class SankeyWidget(widgets.DOMWidget):
     _model_name = Unicode('SankeyModel').tag(sync=True)
     _view_module = Unicode('jupyter-sankey-widget').tag(sync=True)
     _model_module = Unicode('jupyter-sankey-widget').tag(sync=True)
-    _view_module_version = Unicode('^0.3.0').tag(sync=True)
-    _model_module_version = Unicode('^0.3.0').tag(sync=True)
+    _view_module_version = Unicode('^0.4.0').tag(sync=True)
+    _model_module_version = Unicode('^0.4.0').tag(sync=True)
 
     # Data
     links = List([]).tag(sync=True)
