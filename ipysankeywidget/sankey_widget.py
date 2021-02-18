@@ -19,8 +19,8 @@ class SankeyWidget(widgets.DOMWidget):
     _model_name = Unicode('SankeyModel').tag(sync=True)
     _view_module = Unicode('jupyter-sankey-widget').tag(sync=True)
     _model_module = Unicode('jupyter-sankey-widget').tag(sync=True)
-    _view_module_version = Unicode('^0.4.0').tag(sync=True)
-    _model_module_version = Unicode('^0.4.0').tag(sync=True)
+    _view_module_version = Unicode('^0.4.1').tag(sync=True)
+    _model_module_version = Unicode('^0.4.1').tag(sync=True)
 
     # Data
     links = List([]).tag(sync=True)
@@ -39,6 +39,7 @@ class SankeyWidget(widgets.DOMWidget):
     # Link label options
     linkLabelFormat = Unicode('').tag(sync=True)
     linkLabelMinWidth = Float(5).tag(sync=True)
+    show_link_info_html = Bool(False).tag(sync=True)
 
     # Get raster and vector image data back
     png = Unicode('').tag(sync=True)

@@ -93,6 +93,7 @@ var SankeyView = widgets.DOMWidgetView.extend({
       .linkColor(linkColor);
 
     select(this.el).append('svg');
+    select(this.el).append('div').attr('class', 'sankey-element-info');
 
     this.diagram.on('selectNode', this.node_clicked.bind(this));
     this.diagram.on('selectLink', this.link_clicked.bind(this));
@@ -224,6 +225,15 @@ var SankeyView = widgets.DOMWidgetView.extend({
   link_clicked: function(d) {
     var link = d ? {source: d.source.id, target: d.target.id, type: d.type, value: d.value} : null;
     this.send({event: 'link_clicked', link: link});
+
+    // Experimental support for showing info
+    var show_info_html = this.model.get('show_link_info_html')
+    var el = select(this.el).select('.sankey-element-info');
+    if (show_info_html && d && d.info_html) {
+      el.html(d.info_html);
+    } else {
+      el.html('');
+    }
   },
 });
 
