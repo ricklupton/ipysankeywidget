@@ -10,3 +10,4 @@ ipysankeywidget/static/
 
 # OS X
 .DS_Store
+/venv/
