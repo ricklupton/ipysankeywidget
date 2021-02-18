@@ -162,6 +162,20 @@ var SankeyView = widgets.DOMWidgetView.extend({
     el.selectAll('.link')
       .style('opacity', 0.8);
 
+    // Experimental support for overlaying marks on links
+    var scale = this.sankeyLayout.scale();
+    el.selectAll('.link')
+      .selectAll('.link-marker')
+      .selection()  // XXX why can't I call this on the transition?
+      .data(d => d.marker ? [d] : [])
+      .join('path')
+      .attr('class', 'link-marker')
+      .style('stroke', 'black')
+      .style('fill', 'none')
+      .style('opacity', 0.8)
+      .attr('transform', d => `translate(${d.points[0].x + 10}, ${d.points[0].y})`)
+      .attr('d', d => `M-4,-${d.marker/2*scale} l8,0 m-4,0 l0,${d.marker*scale} m-4,0 l8,0`)
+
     el.selectAll('line')
       .style('stroke', function(d) { return d.style === 'process' ? '#888' : '#000'; })
       .style('stroke-width', function(d) { return d.style === 'process' ? '4px' : '1px'; });
