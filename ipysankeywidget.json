@@ -1,5 +1,5 @@
 {
   "load_extensions": {
-    "ipysankeywidget/extension": true
+    "jupyter-sankey-widget/extension": true
   }
 }
