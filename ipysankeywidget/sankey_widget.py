@@ -19,8 +19,8 @@ class SankeyWidget(widgets.DOMWidget):
     _model_name = Unicode('SankeyModel').tag(sync=True)
     _view_module = Unicode('jupyter-sankey-widget').tag(sync=True)
     _model_module = Unicode('jupyter-sankey-widget').tag(sync=True)
-    _view_module_version = Unicode('^0.4.1').tag(sync=True)
-    _model_module_version = Unicode('^0.4.1').tag(sync=True)
+    _view_module_version = Unicode('^0.4.2').tag(sync=True)
+    _model_module_version = Unicode('^0.4.2').tag(sync=True)
 
     # Data
     links = List([]).tag(sync=True)
@@ -31,6 +31,7 @@ class SankeyWidget(widgets.DOMWidget):
     groups = List([]).tag(sync=True)
     rank_sets = List([]).tag(sync=True)
     align_link_types = Bool(False).tag(sync=True)
+    node_position_attr = Unicode(None, allow_none=True).tag(sync=True)
 
     # Rendering options
     scale = Float(None, allow_none=True).tag(sync=True)

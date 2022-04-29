@@ -52,6 +52,7 @@ var SankeyModel = widgets.DOMWidgetModel.extend({
     svg : '',
     linkLabelFormat: '',
     linkLabelMinWidth: 5,
+    node_position_attr: null,
   })
 });
 
@@ -101,7 +102,7 @@ var SankeyView = widgets.DOMWidgetView.extend({
     this.value_changed();
     this.model.on('change:layout change:links change:nodes change:order change:groups change:rank_sets ' +
                   'change:align_link_types change:scale change:margins change:linkLabelFormat ' +
-                  'change:linkLabelMinWidth',
+                  'change:linkLabelMinWidth change:node_position_attr',
                   this.value_changed, this);
   },
 
@@ -138,6 +139,19 @@ var SankeyView = widgets.DOMWidgetView.extend({
       .rankSets(this.model.get('rank_sets'));
 
     alignLinkTypes(this.sankeyLayout, this.model.get('align_link_types'));
+
+    // Manual positions?
+    var node_position_attr = this.model.get('node_position_attr');
+    if (node_position_attr) {
+      this.sankeyLayout.nodePosition(d => d[node_position_attr]);
+      // Set scale if not already set -- it will not be automatically set when
+      // using manual layout.
+      if (!this.sankeyLayout.scale()) {
+        this.sankeyLayout.scale(1);
+      }
+    } else {
+      this.sankeyLayout.nodePosition(null);
+    }
 
     var graph = this.sankeyLayout({
       nodes: JSON.parse(JSON.stringify(this.model.get('nodes'))),
