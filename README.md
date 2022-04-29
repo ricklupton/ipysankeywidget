@@ -47,6 +47,7 @@ Examples
 
 See notebooks in examples folder for usage examples. You can try these online
 using
+
 [Binder](https://mybinder.org/v2/gh/ricklupton/ipysankeywidget/master?urlpath=lab/tree/examples/Simple%20example.ipynb),
 or follow the links to static versions on nbviewer:
 - [Simple example](http://nbviewer.jupyter.org/github/ricklupton/ipysankeywidget/blob/master/examples/Simple%20example.ipynb)
@@ -56,6 +57,19 @@ or follow the links to static versions on nbviewer:
 
 Changelog
 -----------
+
+## v0.4.2 (29 April 2022)
+
+- Expose d3-sankey-diagram nodePositions() option to allow for custom node layout.
+
+## v0.4.1 (18 February 2021)
+
+- Experimental support for link "markers"
+- Experimental support for showing HTML info for links
+
+## v0.4.0 (19 November 2020)
+
+- Update to d3-sankey-diagram v0.8.0
 
 ## v0.3.0
 
