@@ -1,5 +1,24 @@
+graft ipysankeywidget/nbextension
+graft ipysankeywidget/labextension
+
+graft js
+graft tests
+prune **/node_modules
+
+include jupyter-sankey-widget.json
+
 include LICENSE
-include README.rst
-recursive-include ipysankeywidget/static *.*
+include setup.py
+include setup.cfg
+include pyproject.toml
+include install.json
+
 recursive-include examples *.ipynb
-include ipysankeywidget.json
+
+# Patterns to exclude from any directory
+global-exclude *~
+global-exclude *.pyc
+global-exclude *.pyo
+global-exclude .git
+global-exclude .ipynb_checkpoints
+global-exclude *.map

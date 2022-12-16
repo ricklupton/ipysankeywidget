@@ -2,38 +2,27 @@
 
 Display Sankey diagrams in IPython / Jupyter notebook using [d3-sankey-diagram](https://github.com/ricklupton/d3-sankey-diagram).
 
-Installation
-------------
+## Installation
 
-Option 1: to install using **pip**:
+To install use pip:
 
     $ pip install ipysankeywidget
+    
+Alternatively, to install using conda:
 
-Then, if using the classic Jupyter Notebook:
+    $ conda install -c conda-forge ipysankeywidget
 
-    $ jupyter nbextension enable --py --sys-prefix ipysankeywidget
-    $ jupyter nbextension enable --py --sys-prefix widgetsnbextension   # <-- you might have already done this,
-                                                                        #     but it's safe to do again
-Or, if using Jupyterlab:
+For a development install, see [DEVELOPING.md](DEVELOPING.md).
 
-    $ jupyter labextension install jupyter-sankey-widget @jupyter-widgets/jupyterlab-manager
-
-Option 2: to install using **conda**:
-
-    $ conda install -c conda-forge ipysankeywidget                # (that's it, nbextensions enabled automatically)
-
-Browser support
----------------
+## Browser support
 
 Tested in Firefox and Chrome. [There have been reports](https://github.com/ricklupton/ipysankeywidget/issues/2) that it's not working in Safari.
     
-Documentation
--------------
+## Documentation
 
 See the
 [d3-sankey-diagram API docs](https://github.com/ricklupton/d3-sankey-diagram/wiki):
-the `value` of the `SankeyWidget` is exactly the same as the `sankey` object
-described there.
+the attributes of the `SankeyWidget` are the same as the properties of the `sankey` object described there.
 
 To change the figure size, use the ipywidgets Layout object:
 
@@ -42,8 +31,7 @@ layout = Layout(width="1000", height="1200")
 SankeyWidget(links=data, layout=layout)
 ```
 
-Examples
---------
+## Examples
 
 See notebooks in examples folder for usage examples. You can try these online
 using
@@ -55,41 +43,44 @@ or follow the links to static versions on nbviewer:
 - [Linking and Layout](http://nbviewer.jupyter.org/github/ricklupton/ipysankeywidget/blob/master/examples/Linking%20and%20Layout.ipynb)
 - [Exporting Images](http://nbviewer.jupyter.org/github/ricklupton/ipysankeywidget/blob/master/examples/Exporting%20Images.ipynb)
 
-Changelog
------------
+## Changelog
 
-## v0.4.2 (29 April 2022)
+### v0.5.0 (16 December 2022)
+
+- Compatible with Jupyter Lab as well as Jupyter notebook.
+
+### v0.4.2 (29 April 2022)
 
 - Expose d3-sankey-diagram nodePositions() option to allow for custom node layout.
 
-## v0.4.1 (18 February 2021)
+### v0.4.1 (18 February 2021)
 
 - Experimental support for link "markers"
 - Experimental support for showing HTML info for links
 
-## v0.4.0 (19 November 2020)
+### v0.4.0 (19 November 2020)
 
 - Update to d3-sankey-diagram v0.8.0
 
-## v0.3.0
+### v0.3.0
 
 - Now supports Jupyterlab
 
-## v0.2.5
+### v0.2.5
 
 - You can now show link values as SVG text elements. Set `linkLabelFormat` to a [d3-format string](https://github.com/d3/d3-format#locale_format); links whose value is more than `linkLabelMinWidth` will have a label using that format.
 - Upgrade to d3-sankey-diagram version 0.7.3
 - ipysankeywidget can now be installed using conda (thanks to Ali Alsabbah #33)
 - Add a check for duplicate links (thanks to Remi Bois #23)
 
-## v0.2.4
+### v0.2.4
 
 - Add events for clicking on nodes and links: `on_node_clicked` and
   `on_link_clicked`. These replace the `on_selected` event.
 
-Contributors
-------------
+## Contributors
 
+- Rick Lupton
 - Nicholas Bollweg
 - Ali Alsabbah
 - Remi Bois

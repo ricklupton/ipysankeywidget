@@ -11,16 +11,32 @@ from traitlets import (
     Unicode,
 )
 
+from ._version import NPM_PACKAGE_RANGE
+
+# See js/lib/sankey-widget.js for the frontend counterpart to this file.
 
 @widgets.register
 class SankeyWidget(widgets.DOMWidget):
-    """Sankey widget"""
+    """Sankey diagram widget."""
+
+    # Name of the widget view class in front-end
     _view_name = Unicode('SankeyView').tag(sync=True)
+
+    # Name of the widget model class in front-end
     _model_name = Unicode('SankeyModel').tag(sync=True)
+
+    # Name of the front-end module containing widget view
     _view_module = Unicode('jupyter-sankey-widget').tag(sync=True)
+
+    # Name of the front-end module containing widget model
     _model_module = Unicode('jupyter-sankey-widget').tag(sync=True)
-    _view_module_version = Unicode('^0.4.2').tag(sync=True)
-    _model_module_version = Unicode('^0.4.2').tag(sync=True)
+
+    # Version of the front-end module containing widget view
+    _view_module_version = Unicode(NPM_PACKAGE_RANGE).tag(sync=True)
+    # Version of the front-end module containing widget model
+    _model_module_version = Unicode(NPM_PACKAGE_RANGE).tag(sync=True)
+
+    # Widget specific properties
 
     # Data
     links = List([]).tag(sync=True)

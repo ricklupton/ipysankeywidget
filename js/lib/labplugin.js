@@ -1,16 +1,17 @@
-var plugin = require('./index');
-var base = require('@jupyter-widgets/base');
+import {SankeyModel, SankeyView, version} from './index';
+import {IJupyterWidgetRegistry} from '@jupyter-widgets/base';
 
-module.exports = {
-  id: 'jupyter-sankey-widget',
-  requires: [base.IJupyterWidgetRegistry],
+export const sankeyWidgetPlugin = {
+  id: 'jupyter-sankey-widget:plugin',
+  requires: [IJupyterWidgetRegistry],
   activate: function(app, widgets) {
       widgets.registerWidget({
           name: 'jupyter-sankey-widget',
-          version: plugin.version,
-          exports: plugin
+          version: version,
+          exports: { SankeyModel, SankeyView }
       });
   },
   autoStart: true
 };
 
+export default sankeyWidgetPlugin;

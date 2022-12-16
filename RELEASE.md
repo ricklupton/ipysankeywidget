@@ -1,23 +1,56 @@
-- To release a new version of ipysankeywidget on PyPI:
+# Release
 
-    - Update _version.py (set release version, remove 'dev')
-    - git add and git commit
-    - `python setup.py sdist`
-    - `python setup.py bdist_wheel`
-    - `twine upload dist/...`
-    - `git tag -a X.X.X -m 'comment'`
-    - Update _version.py (add 'dev' and increment minor)
-    - git add and git commit
-    - `git push`
-    - `git push --tags`
+Before doing a release, check to see if there are any outstanding changes or untracked files:
 
-- To release a new version of jupyter-sankey-widget on NPM:
+```
+git status
+git clean -fdxn
+```
 
-    - `git clean -fdx `(clear the  `dist` and `node_modules`)
-    - `cd js`
-    - `npm install`
-    - `npm publish`
+Commit changes, and make sure that any untracked files can be deleted. Then clean the repository:
 
-- To release a new version ipysankeywidget on Conda:
+```
+git clean -fdx # actually delete untracked files
+```
 
-https://conda.io/docs/user-guide/tutorials/build-pkgs-skeleton.html
+## Javascript release
+
+To release a new version of jupyter-sankey-widget on NPM, first register for an NPM account [here](https://www.npmjs.com/), then log in with `yarn login`. Then:
+
+1. Update `js/package.json` with the new npm package version
+2. Build and publish the npm package inside the `js/` directory:
+
+   ```
+   cd js/
+   yarn install
+   yarn publish
+   cd ..
+   ```
+
+## Python release
+
+To release a new version of ipysankeywidget on PyPI, first make sure that the `build` package is installed: `pip install build`.
+
+1. Update `ipysankeywidget/_version.py`:
+   - Update `__version__`
+   - Update `NPM_PACKAGE_RANGE` if necessary
+2. Commit changes to `_version.py` and tag the release
+   ```
+   git add ipysankeywidget/_version.py
+   git tag -a X.X.X -m 'comment'
+   ```
+3. Generate Python packages and upload to PyPI:
+   ```
+   python -m build
+   twine check dist/*
+   twine upload dist/*
+   ```
+4. Update `_version.py` (add 'dev' and increment minor)
+   ```
+   git commit -a -m 'Back to dev'
+   git push
+   git push --tags
+   ```
+
+To release a new version ipysankeywidget on Conda:
+- https://conda.io/docs/user-guide/tutorials/build-pkgs-skeleton.html
