@@ -6,8 +6,10 @@ build/
 node_modules/
 
 # Compiled javascript
-ipysankeywidget/static/
+ipysankeywidget/nbextension/
+ipysankeywidget/labextension/
 
 # OS X
 .DS_Store
+/examples/test.*
 /venv/

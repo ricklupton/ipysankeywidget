@@ -1,48 +1,57 @@
 {
   "name": "jupyter-sankey-widget",
-  "version": "0.4.2",
+  "version": "0.5.0",
   "description": "Display Sankey diagrams in Jupyter",
   "author": "Rick Lupton",
+  "license": "MIT",
   "main": "lib/index.js",
   "repository": {
     "type": "git",
     "url": "https://github.com/ricklupton/ipysankeywidget.git"
   },
-  "license": "MIT",
   "keywords": [
     "jupyter",
     "widgets",
     "ipython",
     "ipywidgets",
-    "jupyterlab-extension",
-    "sankey"
+    "jupyterlab-extension"
   ],
   "files": [
     "lib/**/*.js",
     "dist/*.js"
   ],
   "scripts": {
-    "clean": "rimraf dist/",
-    "prepublish": "webpack",
-    "build": "webpack",
+    "clean": "rimraf dist/ && rimraf ../ipysankeywidget/labextension/ && rimraf ../ipysankeywidget/nbextension",
+    "prepublish": "yarn run clean && yarn run build:prod",
+    "build": "webpack --mode=development && yarn run build:labextension:dev",
+    "build:prod": "webpack --mode=production && yarn run build:labextension",
+    "build:labextension": "jupyter labextension build .",
+    "build:labextension:dev": "jupyter labextension build --development True .",
     "watch": "webpack --watch --mode=development",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "devDependencies": {
-    "webpack": "^3.5.5",
+    "@jupyterlab/builder": "^3.0.0",
+    "webpack": "^5",
     "rimraf": "^2.6.1"
   },
   "dependencies": {
-    "@jupyter-widgets/base": "^1.1 || ^2",
+    "@jupyter-widgets/base": "^1.1 || ^2 || ^3 || ^4 || ^6",
     "d3-format": "^1.2.0",
     "d3-sankey-diagram": "^0.8.0",
     "d3-scale": "^1.0.5",
     "d3-selection": "^1.0.5",
     "d3-transition": "^1.0.4",
-    "lodash": "^4.17.4",
     "save-svg-as-png": "ricklupton/saveSvgAsPng#dont-load-about-blank"
   },
   "jupyterlab": {
-    "extension": "lib/labplugin"
+    "extension": "lib/labplugin",
+    "outputDir": "../ipysankeywidget/labextension",
+    "sharedPackages": {
+      "@jupyter-widgets/base": {
+        "bundled": false,
+        "singleton": true
+      }
+    }
   }
 }
