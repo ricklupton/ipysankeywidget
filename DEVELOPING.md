@@ -1,25 +1,32 @@
-# Developing
+## Development
 
-For a development installation (requires [Node.js](https://nodejs.org) and [Yarn version 1](https://classic.yarnpkg.com/)),
+We recommend using [uv](https://github.com/astral-sh/uv) for development. It will automatically manage virtual environments and dependencies for you.
 
-    $ git clone https://github.com/ricklupton/ipysankeywidget.git
-    $ cd ipysankeywidget
-    $ pip install -e .
-    $ jupyter nbextension install --py --symlink --overwrite --sys-prefix ipysankeywidget
-    $ jupyter nbextension enable --py --sys-prefix ipysankeywidget
+```sh
+uv run jupyter lab examples/Simple\ example.ipynb
+```
 
-Set up JS packages:
+Alternatively, create and manage your own virtual environment:
 
-    $ cd js
-    $ yarn install
+```sh
+python -m venv .venv
+source .venv/bin/activate
+pip install -e ".[dev]"
+jupyter lab examples/Simple\ example.ipynb
+```
 
-When actively developing your extension for JupyterLab, run the command:
+The widget front-end code bundles it's JavaScript dependencies. After setting up Python, make sure to install these dependencies locally:
 
-    $ jupyter labextension develop --overwrite ipysankeywidget
+```sh
+npm install
+```
 
-Then you need to rebuild the JS when you make a code change:
+Note: while npm should work, on Mac OS it encountered errors install fsevents; using yarn via `uv run jlpm` was able to successfully install the dependencies.
 
-    $ cd js
-    $ yarn run build
+While developing, you can run the following in a separate terminal to automatically rebuild JavaScript as you make changes:
 
-You then need to refresh the JupyterLab page when your javascript changes.
+```sh
+npm run dev
+```
+
+Open `examples/Simple example.ipynb` in JupyterLab, VS Code, or your favorite editor to start developing. Changes made in `js/` will be reflected in the notebook.

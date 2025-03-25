@@ -1,7 +1,11 @@
+import importlib.metadata
+import pathlib
 import warnings
 import base64
 
-import ipywidgets as widgets
+import ipywidgets
+import anywidget
+import traitlets
 from traitlets import (
     Float,
     Dict,
@@ -11,32 +15,15 @@ from traitlets import (
     Unicode,
 )
 
-from ._version import NPM_PACKAGE_RANGE
+try:
+    __version__ = importlib.metadata.version("ipysankeywidget")
+except importlib.metadata.PackageNotFoundError:
+    __version__ = "unknown"
 
-# See js/lib/sankey-widget.js for the frontend counterpart to this file.
 
-@widgets.register
-class SankeyWidget(widgets.DOMWidget):
-    """Sankey diagram widget."""
-
-    # Name of the widget view class in front-end
-    _view_name = Unicode('SankeyView').tag(sync=True)
-
-    # Name of the widget model class in front-end
-    _model_name = Unicode('SankeyModel').tag(sync=True)
-
-    # Name of the front-end module containing widget view
-    _view_module = Unicode('jupyter-sankey-widget').tag(sync=True)
-
-    # Name of the front-end module containing widget model
-    _model_module = Unicode('jupyter-sankey-widget').tag(sync=True)
-
-    # Version of the front-end module containing widget view
-    _view_module_version = Unicode(NPM_PACKAGE_RANGE).tag(sync=True)
-    # Version of the front-end module containing widget model
-    _model_module_version = Unicode(NPM_PACKAGE_RANGE).tag(sync=True)
-
-    # Widget specific properties
+class SankeyWidget(anywidget.AnyWidget):
+    _esm = pathlib.Path(__file__).parent / "static" / "widget.js"
+    _css = pathlib.Path(__file__).parent / "static" / "widget.css"
 
     # Data
     links = List([]).tag(sync=True)
@@ -92,10 +79,10 @@ class SankeyWidget(widgets.DOMWidget):
                 missing_ids.add(link['target'])
         kwargs['nodes'] = nodes + [{'id': k} for k in missing_ids]
 
-        super(SankeyWidget, self).__init__(**kwargs)
+        super().__init__(**kwargs)
 
-        self._node_clicked_handlers = widgets.CallbackDispatcher()
-        self._link_clicked_handlers = widgets.CallbackDispatcher()
+        self._node_clicked_handlers = ipywidgets.CallbackDispatcher()
+        self._link_clicked_handlers = ipywidgets.CallbackDispatcher()
 
         self._auto_png_filename = None
         self._auto_svg_filename = None

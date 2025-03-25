@@ -1,16 +1,24 @@
-# IPython Sankey diagram widget [![Binder](https://mybinder.org/badge.svg)](https://mybinder.org/v2/gh/ricklupton/ipysankeywidget/master?urlpath=lab/tree/examples/Simple%20example.ipynb) [![Conda Version](https://img.shields.io/conda/vn/conda-forge/ipysankeywidget.svg)](https://anaconda.org/conda-forge/ipysankeywidget) 
+# ipysankeywidget [![Binder](https://mybinder.org/badge.svg)](https://mybinder.org/v2/gh/ricklupton/ipysankeywidget/master?urlpath=lab/tree/examples/Simple%20example.ipynb) [![Conda Version](https://img.shields.io/conda/vn/conda-forge/ipysankeywidget.svg)](https://anaconda.org/conda-forge/ipysankeywidget) 
 
 Display Sankey diagrams in IPython / Jupyter notebook using [d3-sankey-diagram](https://github.com/ricklupton/d3-sankey-diagram).
 
 ## Installation
 
-To install use pip:
+```sh
+pip install ipysankeywidget
+```
 
-    $ pip install ipysankeywidget
-    
-Alternatively, to install using conda:
+or with [uv](https://github.com/astral-sh/uv):
 
-    $ conda install -c conda-forge ipysankeywidget
+```sh
+uv add ipysankeywidget
+```
+
+or with conda:
+
+```sh
+conda install -c conda-forge ipysankeywidget
+```
 
 For a development install, see [DEVELOPING.md](DEVELOPING.md).
 
@@ -44,6 +52,10 @@ or follow the links to static versions on nbviewer:
 - [Exporting Images](http://nbviewer.jupyter.org/github/ricklupton/ipysankeywidget/blob/master/examples/Exporting%20Images.ipynb)
 
 ## Changelog
+
+### Unreleased
+
+Updated to use [anywidget](https://anywidget.dev/) for simpler packaging.
 
 ### v0.5.0 (16 December 2022)
 
@@ -85,3 +97,4 @@ or follow the links to static versions on nbviewer:
 - Ali Alsabbah
 - Remi Bois
 - Miguel Mendez
+
