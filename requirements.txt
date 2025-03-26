@@ -1,0 +1,2 @@
+# For Binder notebook setup
+ipysankeywidget
