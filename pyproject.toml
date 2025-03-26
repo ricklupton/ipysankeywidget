@@ -4,9 +4,17 @@ build-backend = "hatchling.build"
 
 [project]
 name = "ipysankeywidget"
-version = "0.0.0"
+version = "0.6.0"
 dependencies = ["anywidget"]
 readme = "README.md"
+description = "Display Sankey diagrams in Jupyter"
+authors = [
+  {name = "Rick Lupton"},
+]
+license = "BSD-3-Clause"
+
+[project.urls]
+homepage = "https://github.com/ricklupton/ipysankeywidget"
 
 # For projects not using `uv`, you can install these development dependencies with:
 # `pip install -e ".[dev]"`

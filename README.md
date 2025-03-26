@@ -57,7 +57,10 @@ You can also try these online using [Binder](https://mybinder.org/v2/gh/ricklupt
 
 ### Unreleased
 
-Updated to use [anywidget](https://anywidget.dev/) for simpler packaging.
+### v0.6.0 (26 March 2025)
+
+- Updated to use [anywidget](https://anywidget.dev/) for simpler packaging.
+- Updated d3-sankey-diagram to v0.9.1
 
 ### v0.5.0 (16 December 2022)
 
