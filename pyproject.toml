@@ -4,7 +4,7 @@ build-backend = "hatchling.build"
 
 [project]
 name = "ipysankeywidget"
-version = "0.6.0"
+version = "0.6.1-dev"
 dependencies = ["anywidget"]
 readme = "README.md"
 description = "Display Sankey diagrams in Jupyter"
