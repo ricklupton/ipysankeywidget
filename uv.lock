@@ -389,6 +389,13 @@ dependencies = [
     { name = "anywidget" },
 ]
 
+[package.optional-dependencies]
+dev = [
+    { name = "ipykernel" },
+    { name = "jupyterlab" },
+    { name = "watchfiles" },
+]
+
 [package.dev-dependencies]
 dev = [
     { name = "ipykernel" },
@@ -397,7 +404,13 @@ dev = [
 ]
 
 [package.metadata]
-requires-dist = [{ name = "anywidget" }]
+requires-dist = [
+    { name = "anywidget" },
+    { name = "ipykernel", marker = "extra == 'dev'" },
+    { name = "jupyterlab", marker = "extra == 'dev'" },
+    { name = "watchfiles", marker = "extra == 'dev'" },
+]
+provides-extras = ["dev"]
 
 [package.metadata.requires-dev]
 dev = [

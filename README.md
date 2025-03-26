@@ -41,11 +41,13 @@ SankeyWidget(links=data, layout=layout)
 
 ## Examples
 
-See notebooks in examples folder for usage examples. You can try these online
-using
+See notebooks in examples folder for usage examples. 
 
-[Binder](https://mybinder.org/v2/gh/ricklupton/ipysankeywidget/master?urlpath=lab/tree/examples/Simple%20example.ipynb),
-or follow the links to static versions on nbviewer:
+```sh
+uv run jupyter lab examples/Simple\ example.ipynb
+```
+
+You can also try these online using [Binder](https://mybinder.org/v2/gh/ricklupton/ipysankeywidget/master?urlpath=lab/tree/examples/Simple%20example.ipynb), or follow the links to static versions on nbviewer:
 - [Simple example](http://nbviewer.jupyter.org/github/ricklupton/ipysankeywidget/blob/master/examples/Simple%20example.ipynb)
 - [Advanced examples](http://nbviewer.jupyter.org/github/ricklupton/ipysankeywidget/blob/master/examples/More%20examples.ipynb)
 - [Linking and Layout](http://nbviewer.jupyter.org/github/ricklupton/ipysankeywidget/blob/master/examples/Linking%20and%20Layout.ipynb)
